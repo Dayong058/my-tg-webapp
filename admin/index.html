@@ -5,94 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>内容管理系统</title>
   
-  <!-- Netlify CMS 核心样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css">
-  
-  <!-- 重要：必须添加的容器元素样式 -->
-  <style>
-    #nc-root {
-      position: relative;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
-  </style>
+  <!-- 使用更稳定的 CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/netlify-cms@2.10.192/dist/cms.css">
 </head>
 <body>
-  <!-- 关键容器元素 - 必须存在 -->
+  <!-- 确保容器元素存在 -->
   <div id="nc-root"></div>
 
-  <!-- Netlify CMS 核心脚本 -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  
-  <!-- 初始化脚本 -->
+  <!-- 延迟加载脚本 -->
   <script>
-    // 确保在DOM完全加载后初始化
+    // 确保 DOM 完全加载后再执行
     document.addEventListener('DOMContentLoaded', function() {
-      // 调试：检查容器是否存在
-      console.log('CMS Root Container:', document.getElementById('nc-root'));
+      // 动态加载 CMS 脚本
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/netlify-cms@2.10.192/dist/netlify-cms.js';
+      script.onload = initCMS;
+      document.head.appendChild(script);
       
-      // 初始化CMS
-      CMS.init({
-        config: {
-          // 后端配置（使用Git Gateway）
-          backend: {
-            name: "git-gateway",
-            branch: "main", // 您的分支名称
-            repo: "Dayong058/my-tg-webapp" // 您的仓库
-          },
-          
-          // 开发环境本地后端（可选项）
-          local_backend: true,
-          
-          // 启用配置文件
-          load_config_file: true,
-          
-          // 配置文件路径（确保路径正确）
-          config_file_url: "/admin/config.yml",
-          
-          // 媒体文件夹
-          media_folder: "static/images",
-          
-          // 公开访问的媒体URL
-          public_folder: "/images",
-          
-          // 站点URL（您的网站地址）
-          site_url: "https://keen-khapse-f00220.netlify.app"
-        }
-      });
-      
-      // 注册事件处理器用于调试
-      CMS.registerEventListener({
-        onEvent: (event) => console.log('CMS Event:', event)
-      });
+      // 错误处理
+      script.onerror = function() {
+        console.error('Failed to load CMS script');
+        showError('无法加载CMS核心脚本，请检查网络连接');
+      };
     });
-  </script>
-  
-  <!-- 错误处理脚本（捕获并显示初始化错误） -->
-  <script>
-    window.addEventListener('error', function(e) {
-      console.error('Global Error:', e.error);
-      
-      // 在页面上显示错误信息
-      const errorDisplay = document.createElement('div');
-      errorDisplay.style = `
+    
+    function initCMS() {
+      try {
+        // 确保 CMS 对象存在
+        if (typeof CMS !== 'undefined') {
+          CMS.init({
+            config: {
+              backend: {
+                name: "git-gateway",
+                branch: "main",
+                repo: "Dayong058/my-tg-webapp"
+              },
+              local_backend: true,
+              load_config_file: true,
+              config_file_url: "/admin/config.yml",
+              media_folder: "static/images",
+              public_folder: "/images",
+              site_url: "https://keen-khapse-f00220.netlify.app"
+            }
+          });
+        } else {
+          throw new Error('CMS 对象未定义');
+        }
+      } catch (error) {
+        console.error('CMS 初始化失败:', error);
+        showError(`CMS 初始化错误: ${error.message}`);
+      }
+    }
+    
+    function showError(message) {
+      const errorDiv = document.createElement('div');
+      errorDiv.style = `
         position: fixed;
-        top: 20px;
-        left: 20px;
-        right: 20px;
+        top: 0;
+        left: 0;
+        right: 0;
         padding: 20px;
         background: #ffebee;
         color: #b71c1c;
-        border: 2px solid #f44336;
-        border-radius: 8px;
+        border-bottom: 2px solid #f44336;
         z-index: 10000;
-        font-family: monospace;
-        white-space: pre-wrap;
+        font-family: sans-serif;
+        text-align: center;
       `;
-      errorDisplay.textContent = `错误: ${e.error.message}\n\n位置: ${e.filename}:${e.lineno}`;
-      
-      document.body.appendChild(errorDisplay);
-    });
+      errorDiv.innerHTML = `
+        <strong>系统错误</strong>: ${message}
+        <br><small>请截图此消息联系技术支持</small>
+      `;
+      document.body.prepend(errorDiv);
+    }
   </script>
 </body>
 </html>
