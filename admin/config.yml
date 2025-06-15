@@ -1,11 +1,6 @@
 backend:
-  name: github
-  repo: Dayong058/my-tg-webapp
+  name: git-gateway
   branch: main
-  auth_type: implicit
-  app_id: Ov23litawIu3ODaducCZ
-  base_url: https://keen-khapse-f00220.netlify.app
-  auth_endpoint: /admin/auth
 
 media_folder: "images"
 public_folder: "/images"
