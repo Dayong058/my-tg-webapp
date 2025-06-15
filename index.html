@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱小姐爱选妃 - VIP会员专享</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入 Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <img src="images/10.jpg" alt="测试图片" style="width:100%;display:block;margin-bottom:20px;">
+    <h2>欢迎来到我的电报小程序测试页</h2>
+    <p>点击 Telegram 底部主按钮试试效果！</p>
+
+    <!-- Telegram WebApp 主按钮交互代码，务必放在 body 最底部 -->
+    <script>
+      // 判断 Telegram WebApp 环境，避免本地浏览器报错
+      if (window.Telegram && window.Telegram.WebApp) {
+          // 等待 WebApp 准备好
+          window.Telegram.WebApp.ready();
+
+          // 可选：根据 Telegram 主题设置背景色
+          document.body.style.background = window.Telegram.WebApp.themeParams.bg_color || '#fff';
+
+          // 设置主按钮文本
+          Telegram.WebApp.MainButton.setText('点我立即体验');
+          Telegram.WebApp.MainButton.show();
+
+          // 主按钮点击事件
+          Telegram.WebApp.MainButton.onClick(function() {
+              // 你可以自定义这里的交互
+              alert('你点击了小程序主按钮！');
+              // Telegram.WebApp.close(); // 在真正发布时可解开注释，让用户返回Telegram主界面
+          });
+      } else {
+          // 不是在 Telegram 小程序环境里，可以做提示
+          console.log("未检测到 Telegram WebApp 环境，本地预览主按钮无效。");
+      }
+    </script>
+</body>
+</html>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f1f1f1;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #e94560;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(233, 69, 96, 0.7);
+            margin-bottom: 10px;
+        }
+        
+        .logo span {
+            color: #e94560;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #a9a9a9;
+            margin-bottom: 15px;
+        }
+        
+        .vip-offer {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+        }
+        
+        .membership-notices {
+            background: rgba(30, 30, 46, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #e94560;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+        }
+        
+        .notice-card {
+            background: rgba(40, 40, 60, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e94560;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .notice-card:hover {
+            transform: translateX(5px);
+            background: rgba(50, 50, 70, 0.9);
+        }
+        
+        .notice-date {
+            color: #e94560;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .vip-benefits {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #4fc3f7;
+        }
+        
+        .filter-section {
+            background: rgba(30, 30, 46, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            background: rgba(60, 60, 80, 0.7);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .filter-tab:hover, .filter-tab.active {
+            background: #e94560;
+            transform: translateY(-2px);
+        }
+        
+        /* 二级菜单样式 */
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(40, 40, 60, 0.95);
+            border-radius: 10px;
+            padding: 10px;
+            width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+            display: none;
+            margin-top: 10px;
+        }
+        
+        .submenu-item {
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .submenu-item:hover {
+            background: rgba(233, 69, 96, 0.7);
+        }
+        
+        .filter-tab:hover .submenu {
+            display: block;
+        }
+        
+        .filter-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .filter-item {
+            background: rgba(40, 40, 60, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .filter-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(50, 50, 70, 0.9);
+        }
+        
+        .filter-location {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .filter-date {
+            color: #e94560;
+            font-size: 0.9rem;
+        }
+        
+        .gallery-section {
+            background: rgba(30, 30, 46, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 320px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px 15px 15px;
+            transform: translateY(5px);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+        
+        .image-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .image-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        
+        .vip-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #ff8a00, #ff0080);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #777;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+        }
+        
+        .api-info {
+            background: rgba(40, 40, 60, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-family: monospace;
+            word-break: break-all;
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+        
+        /* 二级页面样式 */
+        .subpage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 20, 0.95);
+            z-index: 1000;
+            display: none;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+        
+        .subpage-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(30, 30, 50, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #e94560;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .subpage-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .subpage-title {
+            font-size: 2rem;
+            color: #e94560;
+            margin-bottom: 15px;
+        }
+        
+        .subpage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .subpage-item {
+            background: rgba(40, 40, 60, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .subpage-item:hover {
+            transform: translateY(-5px);
+            background: rgba(50, 50, 70, 0.9);
+        }
+        
+        /* 调试面板 */
+        .debug-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 1000;
+            max-width: 300px;
+            border: 1px solid #e94560;
+        }
+        
+        .debug-title {
+            color: #e94560;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .debug-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .debug-btn {
+            background: rgba(233, 69, 96, 0.7);
+            border: none;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .debug-btn:hover {
+            background: rgba(233, 69, 96, 1);
+        }
+        
+        .debug-info {
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .filter-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .debug-panel {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+            
+            .subpage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .filter-tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">爱小姐<span>爱选妃</span></div>
+            <div class="tagline">@GOGOGO · 尊享会员服务</div>
+            <div class="vip-offer">
+                <i class="fas fa-crown"></i> 新会员折首单介绍费
+            </div>
+        </header>
+        
+        <section class="membership-notices">
+            <h2 class="section-title"><i class="fas fa-bell"></i> 会员通知</h2>
+            <div class="notice-card" onclick="openSubPage('会员详情', '80147****')">
+                <div class="notice-date">6/14</div>
+                <div>恭喜老板 <span class="user-id">80147****</span> 成为VIP会员</div>
+                <div class="vip-benefits">可免费查看所有验证视频，提前锁单！</div>
+            </div>
+            <div class="notice-card" onclick="openSubPage('会员详情', '77487****')">
+                <div class="notice-date">6/12</div>
+                <div>恭喜老板 <span class="user-id">77487****</span> 成为VIP会员</div>
+                <div class="vip-benefits">可免费查看所有验证视频，提前锁单！</div>
+            </div>
+        </section>
+        
+        <section class="filter-section">
+            <h2 class="section-title"><i class="fas fa-filter"></i> 筛选/查找</h2>
+            <div class="filter-tabs">
+                <div class="filter-tab active">
+                    全部地区
+                    <div class="submenu">
+                        <div class="submenu-item" onclick="openSubPage('地区详情', '全部地区')">查看全部地区</div>
+                        <div class="submenu-item" onclick="openSubPage('地区详情', '热门地区')">热门地区</div>
+                        <div class="submenu-item" onclick="openSubPage('地区详情', '最新地区')">最新地区</div>
+                    </div>
+                </div>
+                <div class="filter-tab">
+                    热门地区
+                    <div class="submenu">
+                        <div class="submenu-item" onclick="openSubPage('地区详情', '广东地区')">广东地区</div>
+                        <div class="submenu-item" onclick="openSubPage('地区详情', '四川地区')">四川地区</div>
+                        <div class="submenu-item" onclick="openSubPage('地区详情', '浙江地区')">浙江地区</div>
+                    </div>
+                </div>
+                <div class="filter-tab">
+                    最新上线
+                    <div class="submenu">
+                        <div class="submenu-item" onclick="openSubPage('最新上线', '本月新会员')">本月新会员</div>
+                        <div class="submenu-item" onclick="openSubPage('最新上线', '本周新会员')">本周新会员</div>
+                        <div class="submenu-item" onclick="openSubPage('最新上线', '今日新会员')">今日新会员</div>
+                    </div>
+                </div>
+                <div class="filter-tab">
+                    VIP专享
+                    <div class="submenu">
+                        <div class="submenu-item" onclick="openSubPage('VIP专享', 'VIP视频')">VIP视频</div>
+                        <div class="submenu-item" onclick="openSubPage('VIP专享', 'VIP特权')">VIP特权</div>
+                        <div class="submenu-item" onclick="openSubPage('VIP专享', 'VIP活动')">VIP活动</div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-content">
+                <div class="filter-item" onclick="openSubPage('地区详情', '广东东燕')">
+                    <div class="filter-location">广东东燕</div>
+                    <div class="filter-date">08-13</div>
+                </div>
+                <div class="filter-item" onclick="openSubPage('地区详情', '四川乐山')">
+                    <div class="filter-location">四川乐山</div>
+                    <div class="filter-date">06-13</div>
+                </div>
+                <div class="filter-item" onclick="openSubPage('地区详情', '江苏南京')">
+                    <div class="filter-location">江苏南京</div>
+                    <div class="filter-date">07-22</div>
+                </div>
+                <div class="filter-item" onclick="openSubPage('地区详情', '浙江杭州')">
+                    <div class="filter-location">浙江杭州</div>
+                    <div class="filter-date">06-30</div>
+                </div>
+                <div class="filter-item" onclick="openSubPage('地区详情', '北京朝阳')">
+                    <div class="filter-location">北京朝阳</div>
+                    <div class="filter-date">07-01</div>
+                </div>
+                <div class="filter-item" onclick="openSubPage('地区详情', '上海浦东')">
+                    <div class="filter-location">上海浦东</div>
+                    <div class="filter-date">06-25</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="gallery-section">
+            <h2 class="section-title"><i class="fas fa-images"></i> 精选推荐</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openSubPage('模特详情', '小雅')">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="精选图片">
+                    <div class="image-overlay">
+                        <div class="image-title">小雅 · 模特</div>
+                        <div class="image-meta">
+                            <span>广东 · 深圳</span>
+                            <span>评分: 9.2</span>
+                        </div>
+                    </div>
+                    <div class="vip-badge">VIP专享</div>
+                </div>
+                
+                <div class="gallery-item" onclick="openSubPage('模特详情', '莉莉')">
+                    <img src="https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="精选图片">
+                    <div class="image-overlay">
+                        <div class="image-title">莉莉 · 舞蹈老师</div>
+                        <div class="image-meta">
+                            <span>四川 · 成都</span>
+                            <span>评分: 9.5</span>
+                        </div>
+                    </div>
+                    <div class="vip-badge">VIP专享</div>
+                </div>
+                
+                <div class="gallery-item" onclick="openSubPage('模特详情', '小美')">
+                    <img src="https://images.unsplash.com/photo-1619855515062-4d384f19ab63?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="精选图片">
+                    <div class="image-overlay">
+                        <div class="image-title">小美 · 空姐</div>
+                        <div class="image-meta">
+                            <span>上海 · 浦东</span>
+                            <span>评分: 9.0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openSubPage('模特详情', '梦瑶')">
+                    <img src="https://images.unsplash.com/photo-1567532939604-b6b5b0e16019?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="精选图片">
+                    <div class="image-overlay">
+                        <div class="image-title">梦瑶 · 学生</div>
+                        <div class="image-meta">
+                            <span>北京 · 海淀</span>
+                            <span>评分: 8.8</span>
+                        </div>
+                    </div>
+                    <div class="vip-badge">VIP专享</div>
+                </div>
+                
+                <div class="gallery-item" onclick="openSubPage('模特详情', '安娜')">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="精选图片">
+                    <div class="image-overlay">
+                        <div class="image-title">安娜 · 设计师</div>
+                        <div class="image-meta">
+                            <span>广东 · 广州</span>
+                            <span>评分: 9.3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" onclick="openSubPage('模特详情', '思思')">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="精选图片">
+                    <div class="image-overlay">
+                        <div class="image-title">思思 · 主播</div>
+                        <div class="image-meta">
+                            <span>浙江 · 杭州</span>
+                            <span>评分: 9.1</span>
+                        </div>
+                    </div>
+                    <div class="vip-badge">VIP专享</div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2023 爱小姐爱选妃 · VIP会员专享平台</p>
+            <p>所有内容仅供会员查看，未经授权禁止传播</p>
+            <div class="api-info">
+                <p><strong>API:</strong> 7741458586:AAHybHofsP4N4eYhG2sHWcXq6i9cI_Exmxo</p>
+                <p><strong>ID:</strong> 6344426539</p>
+            </div>
+        </footer>
+        
+        <!-- 调试面板 -->
+        <div class="debug-panel">
+            <div class="debug-title">调试控制台</div>
+            <div class="debug-controls">
+                <button class="debug-btn" id="toggleTheme">切换主题</button>
+                <button class="debug-btn" id="addMember">添加测试会员</button>
+                <button class="debug-btn" id="showApi">显示API信息</button>
+            </div>
+            <div class="debug-info">
+                当前状态: <span id="debugStatus">正常</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 二级页面 -->
+    <div id="subpage" class="subpage">
+        <div class="subpage-content">
+            <div class="close-btn" onclick="closeSubPage()">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="subpage-header">
+                <h2 class="subpage-title" id="subpageTitle">会员详情</h2>
+                <p id="subpageSubtitle">VIP会员专属信息</p>
+            </div>
+            <div id="subpageContent">
+                <!-- 内容会通过JavaScript动态填充 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 二级页面功能
+        function openSubPage(title, subtitle) {
+            const subpage = document.getElementById('subpage');
+            const subpageTitle = document.getElementById('subpageTitle');
+            const subpageSubtitle = document.getElementById('subpageSubtitle');
+            const subpageContent = document.getElementById('subpageContent');
+            
+            subpageTitle.textContent = title;
+            subpageSubtitle.textContent = subtitle;
+            
+            // 根据点击的内容生成不同的内容
+            let content = '';
+            
+            if (title === '会员详情') {
+                content = `
+                    <div class="vip-details">
+                        <div class="vip-header">
+                            <div class="vip-id">会员ID: ${subtitle}</div>
+                            <div class="vip-date">加入日期: ${new Date().toLocaleDateString()}</div>
+                        </div>
+                        
+                        <div class="vip-stats">
+                            <div class="stat-card">
+                                <div class="stat-value">28</div>
+                                <div class="stat-label">已查看视频</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">已预约服务</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">VIP</div>
+                                <div class="stat-label">会员等级</div>
+                            </div>
+                        </div>
+                        
+                        <h3>会员特权</h3>
+                        <ul class="privileges">
+                            <li>免费查看所有验证视频</li>
+                            <li>优先预约心仪对象</li>
+                            <li>专属客服服务</li>
+                            <li>会员专享折扣</li>
+                            <li>新会员首单优惠</li>
+                        </ul>
+                        
+                        <h3>最近活动</h3>
+                        <div class="activity-log">
+                            <div class="activity-item">
+                                <div class="activity-date">${new Date().toLocaleDateString()}</div>
+                                <div class="activity-desc">查看了 小美 的资料</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-date">${new Date(new Date().setDate(new Date().getDate()-1)).toLocaleDateString()}</div>
+                                <div class="activity-desc">预约了 莉莉 的服务</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-date">${new Date(new Date().setDate(new Date().getDate()-2)).toLocaleDateString()}</div>
+                                <div class="activity-desc">充值了 1000 元</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (title === '地区详情') {
+                content = `
+                    <h3>${subtitle} - 详细信息</h3>
+                    <div class="location-info">
+                        <p>${subtitle}地区拥有丰富的资源，多位优质会员在此区域提供服务。</p>
+                        
+                        <div class="location-stats">
+                            <div class="stat-card">
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">在线会员</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">8.9</div>
+                                <div class="stat-label">平均评分</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">96%</div>
+                                <div class="stat-label">满意率</div>
+                            </div>
+                        </div>
+                        
+                        <h4>热门推荐</h4>
+                        <div class="subpage-grid">
+                            <div class="subpage-item" onclick="openSubPage('模特详情', '${subtitle}会员1')">
+                                <div class="image-title">${subtitle}会员1</div>
+                                <div class="image-meta">评分: 9.2</div>
+                            </div>
+                            <div class="subpage-item" onclick="openSubPage('模特详情', '${subtitle}会员2')">
+                                <div class="image-title">${subtitle}会员2</div>
+                                <div class="image-meta">评分: 8.7</div>
+                            </div>
+                            <div class="subpage-item" onclick="openSubPage('模特详情', '${subtitle}会员3')">
+                                <div class="image-title">${subtitle}会员3</div>
+                                <div class="image-meta">评分: 9.0</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (title === '模特详情') {
+                content = `
+                    <div class="model-details">
+                        <div class="model-header">
+                            <h3>${subtitle} · 详细信息</h3>
+                            <div class="model-rating">评分: 9.2</div>
+                        </div>
+                        
+                        <div class="model-stats">
+                            <div class="stat-card">
+                                <div class="stat-value">28</div>
+                                <div class="stat-label">服务次数</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">96%</div>
+                                <div class="stat-label">满意率</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">VIP</div>
+                                <div class="stat-label">会员专享</div>
+                            </div>
+                        </div>
+                        
+                        <h4>基本信息</h4>
+                        <div class="model-info">
+                            <p><strong>年龄:</strong> 24岁</p>
+                            <p><strong>身高:</strong> 168cm</p>
+                            <p><strong>体重:</strong> 50kg</p>
+                            <p><strong>所在地:</strong> 广东深圳</p>
+                            <p><strong>职业:</strong> 模特</p>
+                            <p><strong>服务类型:</strong> VIP专享</p>
+                        </div>
+                        
+                        <h4>服务内容</h4>
+                        <ul class="services">
+                            <li>私人陪伴</li>
+                            <li>商务陪同</li>
+                            <li>旅行伴侣</li>
+                            <li>特殊场合出席</li>
+                        </ul>
+                        
+                        <h4>客户评价</h4>
+                        <div class="reviews">
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer">VIP会员80147****</div>
+                                    <div class="review-date">2023-06-10</div>
+                                </div>
+                                <div class="review-content">${subtitle}服务非常专业，体验极佳！</div>
+                            </div>
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="reviewer">VIP会员77487****</div>
+                                    <div class="review-date">2023-06-05</div>
+                                </div>
+                                <div class="review-content">非常满意，下次还会选择${subtitle}的服务。</div>
+                            </div>
+                        </div>
+                        
+                        <button class="book-btn" onclick="alert('预约成功！')">立即预约</button>
+                    </div>
+                `;
+            } else {
+                content = `
+                    <h3>${title} - ${subtitle}</h3>
+                    <p>这里是${title}的${subtitle}详细内容页面。</p>
+                    <p>VIP会员可查看完整信息和享受专属服务。</p>
+                    
+                    <div class="subpage-grid">
+                        <div class="subpage-item" onclick="openSubPage('${title}', '${subtitle}项目1')">
+                            <div class="image-title">${subtitle}项目1</div>
+                            <div class="image-meta">点击查看详情</div>
+                        </div>
+                        <div class="subpage-item" onclick="openSubPage('${title}', '${subtitle}项目2')">
+                            <div class="image-title">${subtitle}项目2</div>
+                            <div class="image-meta">点击查看详情</div>
+                        </div>
+                        <div class="subpage-item" onclick="openSubPage('${title}', '${subtitle}项目3')">
+                            <div class="image-title">${subtitle}项目3</div>
+                            <div class="image-meta">点击查看详情</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            subpageContent.innerHTML = content;
+            subpage.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        }
+        
+        function closeSubPage() {
+            document.getElementById('subpage').style.display = 'none';
+            document.body.style.overflow = 'auto'; // 恢复滚动
+        }
+        
+        // 筛选标签交互
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 模拟筛选效果
+                const filterType = this.textContent;
+                document.getElementById('debugStatus').textContent = `已应用筛选: ${filterType}`;
+            });
+        });
+        
+        // 图片悬停效果增强
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+        
+        // 调试功能
+        document.getElementById('toggleTheme').addEventListener('click', function() {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            document.getElementById('debugStatus').textContent = 
+                `已切换至${isLight ? '明亮' : '暗黑'}主题`;
+        });
+        
+        document.getElementById('addMember').addEventListener('click', function() {
+            const notices = document.querySelector('.membership-notices');
+            const newNotice = document.createElement('div');
+            newNotice.className = 'notice-card';
+            newNotice.innerHTML = `
+                <div class="notice-date">${new Date().toLocaleDateString('zh-CN', {month: 'numeric', day: 'numeric'})}</div>
+                <div>恭喜老板 <span class="user-id">${Math.floor(10000000 + Math.random() * 90000000)}</span> 成为VIP会员</div>
+                <div class="vip-benefits">可免费查看所有验证视频，提前锁单！</div>
+            `;
+            newNotice.onclick = function() {
+                openSubPage('会员详情', this.querySelector('.user-id').textContent);
+            };
+            notices.appendChild(newNotice);
+            document.getElementById('debugStatus').textContent = '已添加测试会员';
+        });
+        
+        document.getElementById('showApi').addEventListener('click', function() {
+            const apiInfo = document.querySelector('.api-info');
+            apiInfo.style.display = apiInfo.style.display === 'none' ? 'block' : 'none';
+            document.getElementById('debugStatus').textContent = 
+                apiInfo.style.display === 'none' ? '已隐藏API信息' : '已显示API信息';
+        });
+        
+        // 添加主题切换样式
+        const style = document.createElement('style');
+        style.textContent = `
+            .light-theme {
+                background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+                color: #333;
+            }
+            .light-theme .membership-notices,
+            .light-theme .filter-section,
+            .light-theme .gallery-section,
+            .light-theme .api-info,
+            .light-theme .notice-card,
+            .light-theme .filter-item {
+                background: rgba(255, 255, 255, 0.9);
+                color: #333;
+                border: 1px solid #eee;
+            }
+            .light-theme .vip-badge {
+                background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            }
+            .light-theme .submenu,
+            .light-theme .subpage-content {
+                background: rgba(255, 255, 255, 0.95);
+                color: #333;
+            }
+            .light-theme .submenu-item:hover {
+                background: rgba(233, 69, 96, 0.3);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
