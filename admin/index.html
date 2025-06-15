@@ -1,10 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <title>内容管理后台</title>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>内容管理系统</title>
+  
+  <!-- Netlify CMS 核心样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css">
+  
+  <!-- 重要：必须添加的容器元素样式 -->
+  <style>
+    #nc-root {
+      position: relative;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+  </style>
 </head>
 <body>
+  <!-- 关键容器元素 - 必须存在 -->
+  <div id="nc-root"></div>
+
+  <!-- Netlify CMS 核心脚本 -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  
+  <!-- 初始化脚本 -->
+  <script>
+    // 确保在DOM完全加载后初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      // 调试：检查容器是否存在
+      console.log('CMS Root Container:', document.getElementById('nc-root'));
+      
+      // 初始化CMS
+      CMS.init({
+        config: {
+          // 后端配置（使用Git Gateway）
+          backend: {
+            name: "git-gateway",
+            branch: "main", // 您的分支名称
+            repo: "Dayong058/my-tg-webapp" // 您的仓库
+          },
+          
+          // 开发环境本地后端（可选项）
+          local_backend: true,
+          
+          // 启用配置文件
+          load_config_file: true,
+          
+          // 配置文件路径（确保路径正确）
+          config_file_url: "/admin/config.yml",
+          
+          // 媒体文件夹
+          media_folder: "static/images",
+          
+          // 公开访问的媒体URL
+          public_folder: "/images",
+          
+          // 站点URL（您的网站地址）
+          site_url: "https://your-website-url.com"
+        }
+      });
+      
+      // 注册事件处理器用于调试
+      CMS.registerEventListener({
+        onEvent: (event) => console.log('CMS Event:', event)
+      });
+    });
+  </script>
+  
+  <!-- 错误处理脚本（捕获并显示初始化错误） -->
+  <script>
+    window.addEventListener('error', function(e) {
+      console.error('Global Error:', e.error);
+      
+      // 在页面上显示错误信息
+      const errorDisplay = document.createElement('div');
+      errorDisplay.style = `
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        padding: 20px;
+        background: #ffebee;
+        color: #b71c1c;
+        border: 2px solid #f44336;
+        border-radius: 8px;
+        z-index: 10000;
+        font-family: monospace;
+        white-space: pre-wrap;
+      `;
+      errorDisplay.textContent = `错误: ${e.error.message}\n\n位置: ${e.filename}:${e.lineno}`;
+      
+      document.body.appendChild(errorDisplay);
+    });
+  </script>
 </body>
 </html>
