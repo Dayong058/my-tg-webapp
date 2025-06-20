@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "页面内容"
+    folder: "content"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "正文", name: "body", widget: "markdown"}
+      - {label: "图片", name: "image", widget: "image"}

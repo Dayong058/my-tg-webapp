@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>内容管理系统</title>
+  
+  <!-- 使用更稳定的 CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/netlify-cms@2.10.192/dist/cms.css">
+</head>
+<body>
+  <!-- 确保容器元素存在 -->
+  <div id="nc-root"></div>
+
+  <!-- 延迟加载脚本 -->
+  <script>
+    // 确保 DOM 完全加载后再执行
+    document.addEventListener('DOMContentLoaded', function() {
+      // 动态加载 CMS 脚本
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/netlify-cms@2.10.192/dist/netlify-cms.js';
+      script.onload = initCMS;
+      document.head.appendChild(script);
+      
+      // 错误处理
+      script.onerror = function() {
+        console.error('Failed to load CMS script');
+        showError('无法加载CMS核心脚本，请检查网络连接');
+      };
+    });
+    
+    function initCMS() {
+      try {
+        // 确保 CMS 对象存在
+        if (typeof CMS !== 'undefined') {
+          CMS.init({
+            config: {
+              backend: {
+                name: "git-gateway",
+                branch: "main",
+                repo: "Dayong058/my-tg-webapp"
+              },
+              local_backend: true,
+              load_config_file: true,
+              config_file_url: "/admin/config.yml",
+              media_folder: "static/images",
+              public_folder: "/images",
+              site_url: "https://keen-khapse-f00220.netlify.app"
+            }
+          });
+        } else {
+          throw new Error('CMS 对象未定义');
+        }
+      } catch (error) {
+        console.error('CMS 初始化失败:', error);
+        showError(`CMS 初始化错误: ${error.message}`);
+      }
+    }
+    
+    function showError(message) {
+      const errorDiv = document.createElement('div');
+      errorDiv.style = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: #ffebee;
+        color: #b71c1c;
+        border-bottom: 2px solid #f44336;
+        z-index: 10000;
+        font-family: sans-serif;
+        text-align: center;
+      `;
+      errorDiv.innerHTML = `
+        <strong>系统错误</strong>: ${message}
+        <br><small>请截图此消息联系技术支持</small>
+      `;
+      document.body.prepend(errorDiv);
+    }
+  </script>
+</body>
+</html>
