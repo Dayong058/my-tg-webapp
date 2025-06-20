@@ -1,0 +1,228 @@
+{
+  "users": {
+    "6344426539": {
+      "id": 6344426539,
+      "name": "房、总—酒店公寓【看主页】",
+      "level": 1,
+      "exp": 19,
+      "expToNextLevel": 100,
+      "health": 100,
+      "maxHealth": 100,
+      "spirit": 100,
+      "maxSpirit": 100,
+      "attack": 10,
+      "defense": 5,
+      "speed": 10,
+      "gold": 100,
+      "门派": "门派_1750184730375",
+      "职务": "掌门",
+      "equip": {
+        "weapon": null,
+        "armor": null,
+        "helmet": null,
+        "boots": null,
+        "accessory": null
+      },
+      "inventory": [],
+      "lastXiuLianTime": 1750195752156,
+      "lastMessageTime": 1750254502058,
+      "messageCount": 2,
+      "createdTime": 1750183529177,
+      "pkWins": 0,
+      "pkLosses": 0,
+      "monsterKills": 0,
+      "boosKills": 0,
+      "江湖排名": 0,
+      "称号": "初入江湖",
+      "skills": [
+        1
+      ],
+      "activeSkill": 1,
+      "skillCooldowns": {
+        "1": 1750184810273
+      },
+      "equipSetCount": {
+        "weapon": 0,
+        "armor": 0,
+        "helmet": 0,
+        "boots": 0,
+        "accessory": 0
+      },
+      "partyMembers": []
+    },
+    "6658025067": {
+      "id": 6658025067,
+      "name": "凌云（涉及资金往来需裸聊确认）",
+      "level": 1,
+      "exp": 9,
+      "expToNextLevel": 100,
+      "health": 100,
+      "maxHealth": 100,
+      "spirit": 100,
+      "maxSpirit": 100,
+      "attack": 10,
+      "defense": 5,
+      "speed": 10,
+      "gold": 100,
+      "门派": null,
+      "职务": "普通弟子",
+      "equip": {
+        "weapon": null,
+        "armor": null,
+        "helmet": null,
+        "boots": null,
+        "accessory": null
+      },
+      "inventory": [],
+      "lastXiuLianTime": 1750196986225,
+      "lastMessageTime": 1750253923711,
+      "messageCount": 2,
+      "createdTime": 1750196885266,
+      "pkWins": 0,
+      "pkLosses": 0,
+      "monsterKills": 0,
+      "boosKills": 0,
+      "江湖排名": 0,
+      "称号": "初入江湖",
+      "skills": [
+        1
+      ],
+      "activeSkill": null,
+      "skillCooldowns": {},
+      "equipSetCount": {
+        "weapon": 0,
+        "armor": 0,
+        "helmet": 0,
+        "boots": 0,
+        "accessory": 0
+      },
+      "partyMembers": [],
+      "lastDaily": 0
+    },
+    "7257712633": {
+      "id": 7257712633,
+      "name": "烟火",
+      "level": 1,
+      "exp": 6,
+      "expToNextLevel": 100,
+      "health": 100,
+      "maxHealth": 100,
+      "spirit": 100,
+      "maxSpirit": 100,
+      "attack": 10,
+      "defense": 5,
+      "speed": 10,
+      "gold": 100,
+      "门派": null,
+      "职务": "普通弟子",
+      "equip": {
+        "weapon": null,
+        "armor": null,
+        "helmet": null,
+        "boots": null,
+        "accessory": null
+      },
+      "inventory": [],
+      "lastXiuLianTime": 1750196946155,
+      "lastMessageTime": 1750197002931,
+      "messageCount": 2,
+      "createdTime": 1750196934270,
+      "pkWins": 0,
+      "pkLosses": 0,
+      "monsterKills": 0,
+      "boosKills": 0,
+      "江湖排名": 0,
+      "称号": "初入江湖",
+      "skills": [
+        1
+      ],
+      "activeSkill": null,
+      "skillCooldowns": {},
+      "equipSetCount": {
+        "weapon": 0,
+        "armor": 0,
+        "helmet": 0,
+        "boots": 0,
+        "accessory": 0
+      },
+      "partyMembers": [],
+      "lastDaily": 0
+    },
+    "7581783500": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750253923710,
+      "messageCount": null
+    },
+    "5603953308": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750256573954
+    },
+    "7639422023": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750254223374,
+      "messageCount": null
+    },
+    "7798695343": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750253923711
+    },
+    "7144309021": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750253923711,
+      "messageCount": null
+    },
+    "7304044006": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750254092197
+    },
+    "6680470548": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750254328567
+    },
+    "7100334279": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750256775249,
+      "messageCount": null
+    },
+    "5896211686": {
+      "lastPkTime": 0,
+      "pkStreak": 0,
+      "lastMessageTime": 1750258031546,
+      "messageCount": null,
+      "health": null,
+      "exp": null,
+      "lastXiuLianTime": 1750257720019
+    }
+  },
+  "groups": {},
+  "clans": {
+    "门派_1750184730375": {
+      "id": "门派_1750184730375",
+      "name": "<华庭房老大>",
+      "level": 1,
+      "members": [
+        6344426539
+      ],
+      "leader": 6344426539,
+      "treasury": 0,
+      "reputation": 0,
+      "skills": [],
+      "created": 1750184730375
+    }
+  },
+  "globalConfig": {
+    "invincibleMode": false,
+    "lastMonsterSpawn": 1750255722638,
+    "monsterSpawnInterval": 1800000,
+    "partyBonus": 1.2,
+    "skillCooldown": 300000
+  }
+}
