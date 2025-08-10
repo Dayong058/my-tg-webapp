@@ -1,0 +1,37 @@
+// bot.js
+require('dotenv').config();
+const { Telegraf } = require('telegraf');
+const db = require('./db');
+
+const BOT_TOKEN = process.env.BOT_TOKEN;
+if (!BOT_TOKEN) throw new Error('BOT_TOKEN required');
+
+const bot = new Telegraf(BOT_TOKEN);
+
+// 当用户发送 /start 或 /merchants 时，展示所有商家，并为每家生成 web_app 按钮
+bot.start(async (ctx) => {
+  ctx.reply('请选择商家：');
+  sendMerchantList(ctx);
+});
+
+async function sendMerchantList(ctx) {
+  const merchants = await db.all('SELECT id, name, slug FROM merchants ORDER BY id');
+  if (!merchants.length) {
+    ctx.reply('当前没有商家（管理员尚未添加）。');
+    return;
+  }
+
+  // 构造每行一个按钮：点击打开 web_app (url 带 merchant slug 或 id)
+  const inline_keyboard = merchants.map(m => ([
+    { text: m.name, web_app: { url: `${process.env.WEBAPP_BASE || 'https://your-domain.com'}/app.html?merchant_id=${m.id}` } }
+  ]));
+
+  ctx.reply('选择商家并打开小程序：', {
+    reply_markup: { inline_keyboard }
+  });
+}
+
+// 示例：管理员可调用 /refresh 刷新（主要用于测试）
+bot.command('merchants', (ctx) => sendMerchantList(ctx));
+
+module.exports = bot;
